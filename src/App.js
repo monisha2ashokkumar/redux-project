@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch()
+  const counter = useSelector(state=>state.counterR.counter)
+  const toggle = useSelector(state=>state.toggleR.toggle)
+
+  const onToggleHandler = ()=>{
+    dispatch ({
+      type:"IS_TOGGLED"
+   })
+  }
+
+  const onIncrementHandler = ()=>{
+    dispatch ({
+       type:"INCREMENT"
+    })
+   }
+
+   const onDecrementHandler = ()=>{
+    dispatch ({
+       type:"DECREMENT"
+    })
+   }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+     <h1>React and Redux</h1>
+      <h2>Counter value: {counter}</h2>
+      {toggle &&
+      <div>
+        <button onClick={onIncrementHandler}>Increment</button>
+        <button onClick={onDecrementHandler}>Decrement</button>
+      </div>}
+      <div>
+      <button onClick={onToggleHandler}>Toggle Counter</button>
+
+      </div>
     </div>
   );
 }
